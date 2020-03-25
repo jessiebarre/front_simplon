@@ -1,4 +1,4 @@
-
+// GET
 
 const dropdown = document.getElementById('country-dropdown');
 dropdown.length = 0;
@@ -29,5 +29,12 @@ request.onload = function() {
         console.log("error");
     }
 }
-
 request.send();
+
+// update div with selected country
+const select = document.getElementById(('country-dropdown'));
+const area = document.getElementsByTagName('div')[0];
+select.addEventListener('change', function () {
+    const selection = select.options[select.selectedIndex].text;
+    area.innerHTML = `The selected country is ${selection}`;
+})
