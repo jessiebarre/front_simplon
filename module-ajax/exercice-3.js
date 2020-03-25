@@ -1,13 +1,13 @@
-// GET
+// DISPLAY COUNTRIES IN SELECT
+const selectCountry = document.createElement('select');
+document.body.appendChild(selectCountry);
 
-const dropdown = document.getElementById('country-dropdown');
-dropdown.length = 0;
 
 const defaultOption = document.createElement('option');
 defaultOption.text = "Choose a country";
 
-dropdown.add(defaultOption);
-dropdown.selectedIndex = 0;
+selectCountry.add(defaultOption);
+selectCountry.selectedIndex = 0;
 
 const url = "http://localhost:8080/country";
 
@@ -23,7 +23,7 @@ request.onload = function() {
             option.text = data[i].name;
             console.log()
             option.value = data[i].id;
-            dropdown.add(option);
+            selectCountry.add(option);
         }
     } else {
         console.log("error");
@@ -31,17 +31,19 @@ request.onload = function() {
 }
 request.send();
 
-// update div with selected country
+// WHEN COUNTRY IS SELECTED, DISPLAY REGIONS
+
+/* // update div with selected country
 
 const area = document.getElementsByTagName('div')[0];
-dropdown.addEventListener('change', function () {
+selectCountry.addEventListener('change', function () {
     const selection = dropdown.options[dropdown.selectedIndex].text;
     if(selection === "Choose a country") {
         area.innerHTML = "No country selected";
     } else {
         area.innerHTML = `The selected country is ${selection}`;
     }
-})
+}) */
 
 // // POST 
 
