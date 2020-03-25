@@ -36,5 +36,9 @@ const select = document.getElementById(('country-dropdown'));
 const area = document.getElementsByTagName('div')[0];
 select.addEventListener('change', function () {
     const selection = select.options[select.selectedIndex].text;
-    area.innerHTML = `The selected country is ${selection}`;
+    if(selection === "Choose a country") {
+        area.innerHTML = "No country selected";
+    } else {
+        area.innerHTML = `The selected country is ${selection}`;
+    }
 })
