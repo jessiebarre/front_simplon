@@ -42,3 +42,44 @@ select.addEventListener('change', function () {
         area.innerHTML = `The selected country is ${selection}`;
     }
 })
+
+// POST 
+
+// get language choice from back list
+const languageDropdown = document.getElementById('language-dropdown');
+
+const defaultOption2 = document.createElement('option');
+defaultOption2.text = "Choose a language";
+
+languageDropdown.add(defaultOption2);
+languageDropdown.selectedIndex = 0;
+
+const languageUrl = "http://localhost:8080/language";
+
+const request2 = new XMLHttpRequest();
+request2.open('GET', languageUrl);
+
+request2.onload = function() {
+    if (request.status === 200) {
+        const data = JSON.parse(request2.responseText);
+        let option;
+        for (let i = 0; i < data.length; i++) {
+            option = document.createElement('option');
+            option.text = data[i];
+            console.log(data[i])
+            option.value = data[i];
+            languageDropdown.add(option);
+        }
+    } else {
+        console.log("error");
+    }
+}
+request2.send();
+
+const submitButton = document.getElementById("submit-country");
+submitButton.addEventListener("click", function(submitEvent) {
+    submitEvent.preventDefault();
+    const inputs = document.getElementsByTagName('input');
+    const countryName = inputs[0].value;
+    const countryLanguage = inputs[1].value;
+});
