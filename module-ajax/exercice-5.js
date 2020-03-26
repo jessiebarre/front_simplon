@@ -154,13 +154,13 @@ function createForm () {
 
         // dropdown fulfilled with backend languages
         const languageDropdown = document.createElement('select');
-        languageDropdown.id = 'language-dropdown';
-
-        const defaultOption = document.createElement('option');
-        defaultOption.text = 'Choose a language';
-        languageDropdown.add(defaultOption);
+        languageDropdown.id = 'languageDropdown';
+        const defaultOption2 = document.createElement('option');
+        defaultOption2.text = 'Choose a language';
+        languageDropdown.add(defaultOption2);
         languageDropdown.selectedIndex = 0;
-    
+
+        
         const languageUrl = "http://localhost:8080/language";
         const languageRequest = new XMLHttpRequest();
         languageRequest.open('GET', languageUrl);
@@ -180,8 +180,7 @@ function createForm () {
             }
         }
         languageRequest.send();
-    
-    
+
     const countryForm = document.createElement('form');
     countryForm.id = 'countryForm';
     document.body.appendChild(countryForm);
@@ -189,6 +188,7 @@ function createForm () {
     
     // input for country name
     const nameInput = document.createElement('input');
+    nameInput.id = 'countryNameInput';
     nameInput.setAttribute('type', 'text');
     nameInput.setAttribute('name', 'countryName');
 
@@ -197,6 +197,7 @@ function createForm () {
     labelInput.innerHTML = 'Enter the name of the country: ';
 
     const submitButton = document.createElement('button');
+    submitButton.id = 'submitButton'
     submitButton.setAttribute('type', 'submit');
     submitButton.innerHTML = 'Submit';
 
@@ -205,6 +206,8 @@ function createForm () {
     countryForm.appendChild(languageDropdown);
     countryForm.appendChild(submitButton);
     document.body.appendChild(countryForm);
+
+
 }
 
 function reinitForm() {
@@ -213,4 +216,29 @@ function reinitForm() {
         reinitForm.parentNode.removeChild(reinitForm);
     }
 }
+
+    // FORM POST 
+function postNewCountry() {
+    // get the values
+    let selection
+    languageDropdown.addEventListener("change", function() {
+        selection = languageDropdown.options[languageDropdown.selectedIndex].value;
+    })
+    console.log(selection);
+
+
+    submitButton.addEventListener('click', function(submitEvent) {
+    submitEvent.preventDefault();
+    // get the input value of country name
+    const countryNameValue = document.getElementById('countryNameInput').value;
+    //console.log(countryNameValue);
+    const newCountry = {
+        countryLanguage: selection,
+        countryName: countryNameValue
+    }
+    console.log(newCountry);
+})
+}
+
+getNewCountryValues();
 
