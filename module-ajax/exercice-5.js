@@ -64,7 +64,6 @@ countriesDropdown.addEventListener("change", function(){
         reinitForm();
         createForm();
 
-    
 /******************* 
  ELSE : GET THE REGIONS FOR SELECTED COUNTRY
 *********************/ 
@@ -152,6 +151,37 @@ countriesDropdown.addEventListener("change", function(){
 })
 
 function createForm () {
+
+        // dropdown fulfilled with backend languages
+        const languageDropdown = document.createElement('select');
+        languageDropdown.id = 'language-dropdown';
+
+        const defaultOption = document.createElement('option');
+        defaultOption.text = 'Choose a language';
+        languageDropdown.add(defaultOption);
+        languageDropdown.selectedIndex = 0;
+    
+        const languageUrl = "http://localhost:8080/language";
+        const languageRequest = new XMLHttpRequest();
+        languageRequest.open('GET', languageUrl);
+    
+        languageRequest.onload = function() {
+            if (languageRequest.status === 200) {
+                const data = JSON.parse(languageRequest.responseText);
+                let option;
+                for (let i = 0; i < data.length; i++) {
+                    option = document.createElement('option');
+                    option.text = data[i];
+                    option.value = data[i];
+                    languageDropdown.add(option);
+                }
+            } else {
+                console.log("error");
+            }
+        }
+        languageRequest.send();
+    
+    
     const countryForm = document.createElement('form');
     countryForm.id = 'countryForm';
     document.body.appendChild(countryForm);
@@ -164,12 +194,17 @@ function createForm () {
 
     const labelInput = document.createElement('label');
     labelInput.setAttribute('name', 'countryName');
-    labelInput.innerHTML = "Enter the name of the country:"
+    labelInput.innerHTML = 'Enter the name of the country: ';
+
+    const submitButton = document.createElement('button');
+    submitButton.setAttribute('type', 'submit');
+    submitButton.innerHTML = 'Submit';
 
     labelInput.appendChild(nameInput);
     countryForm.appendChild(labelInput);
+    countryForm.appendChild(languageDropdown);
+    countryForm.appendChild(submitButton);
     document.body.appendChild(countryForm);
-
 }
 
 function reinitForm() {
@@ -178,3 +213,4 @@ function reinitForm() {
         reinitForm.parentNode.removeChild(reinitForm);
     }
 }
+
