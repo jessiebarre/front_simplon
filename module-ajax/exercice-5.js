@@ -240,5 +240,5 @@ function postNewCountry() {
 })
 }
 
-getNewCountryValues();
+postNewCountry();
 
