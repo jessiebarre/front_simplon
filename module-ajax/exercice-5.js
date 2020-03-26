@@ -33,6 +33,8 @@ requestCountries.onload = function() {
 }
 requestCountries.send();
 
+createForm();
+
 
 // WHEN COUNTRY IS SELECTED, DISPLAY REGIONS
 
@@ -54,13 +56,21 @@ countriesDropdown.addEventListener("change", function(){
     const selection = countriesDropdown.options[countriesDropdown.selectedIndex].text;
     console.log(selection);
 
-        // FORM WHEN NO COURNTRY SELECTED
-     if(selection === 'Choose a country') {
-         const countryForm = document.createElement('form');
-         countryForm.id = 'countryForm';
+/******************* 
+ FORM WHEN NO COUNTRY SELECTED
+ *********************/ 
 
-         // OR ELSE : GET THE REGIONS FOR SELECTED COUNTRY
+     if(selection === 'Choose a country') {
+        reinitForm();
+        createForm();
+
+    
+/******************* 
+ ELSE : GET THE REGIONS FOR SELECTED COUNTRY
+*********************/ 
      } else {
+        reinitForm();
+
         const regionsDropdown = document.createElement('select');
         regionsDropdown.id = 'regions';
         document.body.appendChild(regionsDropdown);
@@ -140,3 +150,26 @@ countriesDropdown.addEventListener("change", function(){
      }
 
 })
+
+function createForm () {
+    const countryForm = document.createElement('form');
+    countryForm.id = 'countryForm';
+    document.body.appendChild(countryForm);
+    countryForm.setAttribute('method', 'post');
+    
+    // input for country name
+    const nameInput = document.createElement('input');
+    nameInput.setAttribute('type', 'text');
+    nameInput.setAttribute('name', 'countryName');
+
+    countryForm.appendChild(nameInput);
+    document.body.appendChild(countryForm);
+
+}
+
+function reinitForm() {
+    if (document.getElementById('countryForm')) {
+        const reinitForm = document.getElementById('countryForm');
+        reinitForm.parentNode.removeChild(reinitForm);
+    }
+}
