@@ -162,7 +162,12 @@ function createForm () {
     nameInput.setAttribute('type', 'text');
     nameInput.setAttribute('name', 'countryName');
 
-    countryForm.appendChild(nameInput);
+    const labelInput = document.createElement('label');
+    labelInput.setAttribute('name', 'countryName');
+    labelInput.innerHTML = "Enter the name of the country:"
+
+    labelInput.appendChild(nameInput);
+    countryForm.appendChild(labelInput);
     document.body.appendChild(countryForm);
 
 }
