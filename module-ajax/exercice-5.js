@@ -3,16 +3,13 @@ const countriesDropdown = document.createElement('select');
 countriesDropdown.id = 'countries'
 document.body.appendChild(countriesDropdown);
 
-
 const defaultOption = document.createElement('option');
 defaultOption.text = "Choose a country";
 
 countriesDropdown.add(defaultOption);
 countriesDropdown.selectedIndex = 0;
 
-
 const url = "http://localhost:8080/country";
-
 const requestCountries = new XMLHttpRequest();
 requestCountries.open('GET', url);
 
@@ -32,51 +29,42 @@ requestCountries.onload = function() {
     }
 }
 requestCountries.send();
-
 createForm();
-
 
 // WHEN COUNTRY IS SELECTED, DISPLAY REGIONS
 
 countriesDropdown.addEventListener("change", function(){
-    
     
     // reinit the former selects 
     if (document.getElementById('regions')) {
         const regionsReinit = document.getElementById('regions');
         regionsReinit.parentNode.removeChild(regionsReinit);
     } 
-
     if (document.getElementById('cities')) {
         const citiesReinit = document.getElementById('cities');
         citiesReinit.parentNode.removeChild(citiesReinit);
     } 
-
-
     const selection = countriesDropdown.options[countriesDropdown.selectedIndex].text;
     console.log(selection);
 
-/******************* 
- FORM WHEN NO COUNTRY SELECTED
- *********************/ 
-
+    /******************* 
+     FORM WHEN NO COUNTRY SELECTED
+    *********************/ 
      if(selection === 'Choose a country') {
         reinitForm();
         createForm();
 
-/******************* 
- ELSE : GET THE REGIONS FOR SELECTED COUNTRY
-*********************/ 
+    /******************* 
+     ELSE : GET THE REGIONS FOR SELECTED COUNTRY
+    *********************/ 
      } else {
         reinitForm();
-
+        // create regions select
         const regionsDropdown = document.createElement('select');
         regionsDropdown.id = 'regions';
         document.body.appendChild(regionsDropdown);
-    
         const defaultOption = document.createElement('option');
         defaultOption.text = "Choose a region";
-    
         regionsDropdown.add(defaultOption);
         regionsDropdown.selectedIndex = 0;
     
@@ -107,15 +95,14 @@ countriesDropdown.addEventListener("change", function(){
             }
             regionsRequest.send();
     
+            // idem to display the cities select
             regionsDropdown.addEventListener("change", function(){
             
                 const citiesDropdown = document.createElement('select');
                 citiesDropdown.id = 'cities';
                 document.body.appendChild(citiesDropdown);
-            
                 const defaultOption = document.createElement('option');
                 defaultOption.text = "Choose a city";
-            
                 citiesDropdown.add(defaultOption);
                 citiesDropdown.selectedIndex = 0;
             
@@ -147,39 +134,37 @@ countriesDropdown.addEventListener("change", function(){
                     citiesRequest.send();
             })
      }
-
-})
+});
 
 function createForm () {
 
-        // dropdown fulfilled with backend languages
-        const languageDropdown = document.createElement('select');
-        languageDropdown.id = 'languageDropdown';
-        const defaultOption2 = document.createElement('option');
-        defaultOption2.text = 'Choose a language';
-        languageDropdown.add(defaultOption2);
-        languageDropdown.selectedIndex = 0;
+    // dropdown fulfilled with backend languages
+    const languageDropdown = document.createElement('select');
+    languageDropdown.id = 'languageDropdown';
+    const defaultOption2 = document.createElement('option');
+    defaultOption2.text = 'Choose a language';
+    languageDropdown.add(defaultOption2);
+    languageDropdown.selectedIndex = 0;
 
-        
-        const languageUrl = "http://localhost:8080/language";
-        const languageRequest = new XMLHttpRequest();
-        languageRequest.open('GET', languageUrl);
+    const languageUrl = "http://localhost:8080/language";
+    const languageRequest = new XMLHttpRequest();
+    languageRequest.open('GET', languageUrl);
     
-        languageRequest.onload = function() {
-            if (languageRequest.status === 200) {
-                const data = JSON.parse(languageRequest.responseText);
-                let option;
-                for (let i = 0; i < data.length; i++) {
-                    option = document.createElement('option');
-                    option.text = data[i];
-                    option.value = data[i];
-                    languageDropdown.add(option);
-                }
-            } else {
-                console.log("error");
+    languageRequest.onload = function() {
+        if (languageRequest.status === 200) {
+            const data = JSON.parse(languageRequest.responseText);
+            let option;
+            for (let i = 0; i < data.length; i++) {
+                option = document.createElement('option');
+                option.text = data[i];
+                option.value = data[i];
+                languageDropdown.add(option);
             }
+        } else {
+            console.log("error");
         }
-        languageRequest.send();
+    }
+    languageRequest.send();
 
     const countryForm = document.createElement('form');
     countryForm.id = 'countryForm';
@@ -206,8 +191,6 @@ function createForm () {
     countryForm.appendChild(languageDropdown);
     countryForm.appendChild(submitButton);
     document.body.appendChild(countryForm);
-
-
 }
 
 function reinitForm() {
@@ -217,15 +200,14 @@ function reinitForm() {
     }
 }
 
-    // FORM POST 
+// FORM POST 
 function postNewCountry() {
     // get the values
     let selection
     languageDropdown.addEventListener("change", function() {
         selection = languageDropdown.options[languageDropdown.selectedIndex].value;
-    })
+    });
     console.log(selection);
-
 
     submitButton.addEventListener('click', function(submitEvent) {
     submitEvent.preventDefault();
@@ -233,12 +215,27 @@ function postNewCountry() {
     const countryNameValue = document.getElementById('countryNameInput').value;
     //console.log(countryNameValue);
     const newCountry = {
-        countryLanguage: selection,
-        countryName: countryNameValue
+        language: selection,
+        name: countryNameValue
     }
     console.log(newCountry);
-})
-}
 
+    const postCountryRequest = new XMLHttpRequest();
+    postCountryRequest.open('POST', 'http://localhost:8080/country');
+    postCountryRequest.setRequestHeader('Content-Type', 'application/json;charset=UTG-8');
+    postCountryRequest.send(JSON.stringify(newCountry));
+    
+    postCountryRequest.addEventListener('load', function() {
+        const createCountryMessage = document.createElement('div');
+        document.body.appendChild(createCountryMessage);
+        if (postCountryRequest.status === 200 ) {
+            createCountryMessage.innerHTML = `New country ${countryNameValue} has been saved`;
+        } else {
+            createCountryMessage.innerHTML = `Error creating new country`;
+        } 
+    });
+
+    })
+}
 postNewCountry();
 
