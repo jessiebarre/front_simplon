@@ -1,6 +1,6 @@
 
 // à exporter...
-export default class ProductsRepository {
+class ProductsRepository {
 
     constructor () {
       this.products = [{

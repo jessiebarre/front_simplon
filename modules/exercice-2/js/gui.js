@@ -1,5 +1,5 @@
 // à exporter...
-export default class GuiBuilder {
+class GuiBuilder {
 
     constructor (cartManager, productsRepository) {
       this.containers = {};

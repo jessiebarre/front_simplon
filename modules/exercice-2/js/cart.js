@@ -1,5 +1,5 @@
 // à exporter...
-export default class CartManager {
+class CartManager {
 
     constructor () {
       this.cart = [];
