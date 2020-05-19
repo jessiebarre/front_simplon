@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: path.resolve(__dirname, 'exercice-02.js'),
+    entry: path.resolve(__dirname, 'exercice-01.js'),
     resolve: {
       extensions: [
         '.js'
@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'exercice-02/build')
+      path: path.resolve(__dirname, 'exercice-01/build')
     },
     devtool: 'inline-source-map'
 };
