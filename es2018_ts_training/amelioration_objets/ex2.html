@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object assign</title>
+</head>
+<body>
+<script>
+    const deLorean = {
+        modele: "DeLorean DMC-12",
+        nbRoues: 4,
+        look: "rétro-futuriste",
+        options: ["portes papillon", "caisse en fibre de verre"]
+    };
+
+    const deLorean2 = Object.create(deLorean);
+    console.log(deLorean2);
+
+    let deLorean3;
+    Object.assign(deLorean3, deLorean, deLorean2);
+    console.log(deLorean3);
+    deLorean3.vole = function () {
+        console.log("Je vole");
+    };
+    deLorean3.voyagerTemps = function(){
+        console.log("Je voyage dans le temps");
+    };
+    deLorean3.vole();
+    deLorean3.voyagerTemps();
+</script>
+</body>
+</html>
