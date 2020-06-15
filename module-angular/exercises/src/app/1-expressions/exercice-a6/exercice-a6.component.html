@@ -1,0 +1,23 @@
+<form action="">
+    <select [(ngModel)]="selectedColor" name="selectedColor">
+        <option value="rouge">Rouge</option>
+        <option value="vert">Vert</option>
+        <option value="bleu">Bleu</option>
+        <option value="rouge-vert">Rouge et vert</option>
+        <option value="rouge-bleu">Rouge et bleu</option>
+        <option value="bleu-vert">Bleu et vert</option>
+        <option value="rouge-vert-bleu">Rouge vert bleu</option>
+    </select>
+</form>
+
+<div 
+    style="width: 100px; height: 100px; background-color: red; border-radius: 50%;"
+    *ngIf="selectedColor === 'rouge' || selectedColor === 'rouge-bleu' || selectedColor === 'rouge-vert' || selectedColor === 'rouge-vert-bleu'"></div>
+
+<div 
+    style="width: 100px; height: 100px; background-color: green; border-radius: 50%;"
+    *ngIf="selectedColor === 'vert' || selectedColor === 'rouge-vert' || selectedColor === 'bleu-vert' || selectedColor === 'rouge-vert-bleu'"></div>
+
+<div 
+    style="width: 100px; height: 100px; background-color: blue; border-radius: 50%;"
+    *ngIf="selectedColor === 'bleu' || selectedColor === 'rouge-bleu' || selectedColor === 'bleu-vert' || selectedColor === 'rouge-vert-bleu'"></div>
