@@ -1,0 +1,12 @@
+<div
+    [ngClass]="{
+        'even': myNumber % 2 === 0,
+        'odd': myNumber %2 !== 0,
+        'positive': myNumber > 0,
+        'negative': myNumber < 0,
+        'isNull': myNumber === 0
+    }"
+
+>{{ myNumber }}</div>
+
+<input type="range" min="-100" max="100" [(ngModel)]="myNumber">

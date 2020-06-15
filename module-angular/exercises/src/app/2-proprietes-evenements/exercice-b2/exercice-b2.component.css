@@ -1,0 +1,20 @@
+.even {
+    color: green;
+}
+
+.odd {
+    color: pink;
+}
+
+.postive {
+    border: 1px solid orange;
+}
+
+.negative {
+    border: 1px solid blue;
+}
+
+.isNull {
+    border: 1px solid gray;
+}
+
