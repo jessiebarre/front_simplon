@@ -1,0 +1,1 @@
+<div *ngFor="let car of cars">{{ car.model | titlecase}} ({{ car.power | uppercase}}) : {{ car.price | currency:'EUR' }} ({{ car.date | date:'dd/MM/yyyy'}})</div>
