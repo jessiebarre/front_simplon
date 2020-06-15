@@ -12,6 +12,7 @@ import { ExerciceA5Component } from './1-expressions/exercice-a5/exercice-a5.com
 import { ExerciceA6Component } from './1-expressions/exercice-a6/exercice-a6.component';
 import { ExerciceA7Component } from './1-expressions/exercice-a7/exercice-a7.component';
 import { ExerciceA8Component } from './1-expressions/exercice-a8/exercice-a8.component';
+import { ExerciceB1Component } from './2-proprietes-evenements/exercice-b1/exercice-b1.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ExerciceA8Component } from './1-expressions/exercice-a8/exercice-a8.com
     ExerciceA5Component,
     ExerciceA6Component,
     ExerciceA7Component,
-    ExerciceA8Component
+    ExerciceA8Component,
+    ExerciceB1Component
   ],
   imports: [
     BrowserModule, FormsModule
