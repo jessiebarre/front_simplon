@@ -27,7 +27,7 @@ export class ExerciceA3Component implements OnInit {
   concateneString(arrayString) {
     let bigString: string = ''
     for (let i = 0; i < arrayString.length; i++) {
-      console.log(arrayString[i])
+      //console.log(arrayString[i])
       bigString += arrayString[i] + ' '
     }
     return bigString
