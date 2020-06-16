@@ -1,0 +1,9 @@
+
+<input type="text" (keyup)=myMethod($event)>
+<p>{{ theKeyCode }}</p>
+
+<div 
+    style="width: 100px; height: 100px; background-color: aqua;"
+    (mousemove)="followMouse($event.clientX, $event.clientY)">
+    <p>X: {{ x }} - Y: {{ y }}</p>
+</div>
