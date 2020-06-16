@@ -1,0 +1,13 @@
+<form action="">
+    <label for="subscription">I subscribe to the newsletter</label>
+    <input type="checkbox" name="subscription" 
+        [checked]="newsletter"
+        (change)="wantSubscribe($event.target.checked)">
+   
+    <label for="gcu">I accept the GCU</label>
+    <input type="checkbox" name="gcu" 
+        [checked]="gcu"
+        (change)="acceptGCU($event.target.checked)">
+    
+    <button [disabled]="!(this.gcu && this.newsletter)">Submit</button>
+</form>
