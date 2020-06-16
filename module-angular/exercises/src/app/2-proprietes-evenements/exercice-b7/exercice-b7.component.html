@@ -1,0 +1,5 @@
+<div 
+    *ngFor="let el of myArray; let i = index"
+    [ngStyle]="{ width: el.width + 'px', height: el.height + 'px', backgroundColor: el.backgroundColor }"
+    (click)="changeWidth(i)"
+></div>
