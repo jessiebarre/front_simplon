@@ -1,0 +1,6 @@
+<form (ngSubmit)="setAdresse()">
+    <input type="text" name="saisieUtilisateur"[(ngModel)]="saisieUtilisateur">
+    <p>{{ saisieUtilisateur }}</p>
+    <button>Afficher</button>
+    <img [src]="adresseImage" alt="">
+</form>
